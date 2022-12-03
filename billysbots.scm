@@ -4,7 +4,7 @@
 ; Kevin Johanson, Breck Bishop, Billy Cherries
 ;
 ; 
-; Acknowledgements: Some Code taken fromBILLY AND KEVIN'S mini proj 6 BILLY AND KEVINS
+; Acknowledgements: Some Code taken from BILLY AND KEVIN'S mini proj 6 BILLY AND KEVINS
 ;
 ;
 
