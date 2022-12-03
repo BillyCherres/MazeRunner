@@ -19,7 +19,7 @@
 
 
 
-
+; bonk
 (import audio)
 
 ; ====================================================
@@ -137,22 +137,22 @@
 ; asdr-list : list?
 ;
 ; creates a vector that plays one of four waves with asdr-envelope applied to it when sample-node is played over it
-; (define new-synthesize-note
-;   (lambda (waveform sample-rate frequency duration asdr-list)
+ (define new-synthesize-note
+   (lambda (modifier sample-rate frequency duration asdr-list)
     
     (let* ([num-sample (* duration sample-rate)])
     
      (cond 
                                                     ;   all ~~~-samples are a list of vectors and will be replaced by the microphone vector
                                                     ;   asdr-envelope will be replaced with the sound modifier that we have yet to produce
-          [(equal? waveform "square")  (apply-envelope (square-sample sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
-          [(equal? waveform "sawtooth") (apply-envelope (sawtooth-sample sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
-          [(equal? waveform "triangle") (apply-envelope (square-sample sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
-          [(equal? waveform "sine") (apply-envelope (sine-sample sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
+          [(equal? modifier "deep-voice-envelope")  (apply-envelope ( ~~~-sample  sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
+          [(equal? modifier "high-voice-envelope") (apply-envelope ( ~~~-sample sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
+          [(equal? modifier "robot-voice-envelope") (apply-envelope ( ~~~-sample sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
+          [(equal? modifier "slow-voice-envelope") (apply-envelope ( ~~~-sample sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
 
       )
-
-    )
+    
+    )))
     
     
 ; ======================================NEW IMPORTS==================================================
