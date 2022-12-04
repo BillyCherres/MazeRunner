@@ -34,9 +34,9 @@
 ;
 ; takes two vectors and multiplies them in a pointwise mannor
 
-  (define apply-envelope
+(define apply-envelope
   (lambda (clip envelope)
-      (vector-map (lambda (x n) (* x n)) clip envelope)
+    (vector-map (lambda (x n) (* x n)) clip envelope)
     ))
 
 
@@ -47,9 +47,9 @@
 ; takes two vectors and adds them in a pointwise mannor
 (define add-envelope
   (lambda (clip envelope)
-      
-       (vector-map (lambda (x n) (+ x n)) clip envelope)
-      
+    
+    (vector-map (lambda (x n) (+ x n)) clip envelope)
+    
     ))
 
 
@@ -59,14 +59,14 @@
 ; 
 ; helper function for synthesize-notes
 (define mini-vect 
-(lambda (vec n)
+  (lambda (vec n)
     (list->vector 
       (list-take 
         (vector->list vec) 
         (/ (length (vector->list vec)) n)
-      ))
-)
-)
+        ))
+    )
+  )
 
 
 ; (new-vect vec n) -> vector
@@ -75,10 +75,10 @@
 ; 
 ; helper function for synthesize-notes
 (define new-vect 
-    (lambda (vec n)
-        (apply append (make-list n (vector->list vec)))
+  (lambda (vec n)
+    (apply append (make-list n (vector->list vec)))
     )
-)
+  )
 
 ; (final-vect vec n) ->vector
 ; vec : vector?
@@ -86,10 +86,10 @@
 ; 
 ; helper function for synthesize-notes
 (define final-vect 
-    (lambda (vec n)
-        (list->vector (new-vect (mini-vect vec n) n))
+  (lambda (vec n)
+    (list->vector (new-vect (mini-vect vec n) n))
     )
-)
+  )
 
 ; (add-vect vec-list) --> vector
 ; vec-list : list of vectors
@@ -99,12 +99,12 @@
 (define add-vect
   (lambda (vec-list) 
     (match vec-list
-    [(cons head null) head]
-    [(cons head tail) (add-envelope head (add-vect tail))]
-
+      [(cons head null) head]
+      [(cons head tail) (add-envelope head (add-vect tail))]
+      
+      )
     )
   )
-)
 
 
 ; (add-vect vec-list) --> vector
@@ -115,8 +115,8 @@
 (define cut-vect
   (lambda (vec)
     (vector-map (lambda (x) (cond [(> x 1) 1] [(< x -1) -1] [else x])) vec)
+    )
   )
-)
 
 
 ; (add-and-cut vec-list) --> vector
@@ -126,8 +126,8 @@
 (define add-and-cut 
   (lambda (vec-list)
     (cut-vect (add-vect vec-list))
+    )
   )
-)
 
 ; (new-synthesize-note waveform sample-rate frequency duration asdr-list) --> vector
 ; waveform : string?
@@ -137,24 +137,24 @@
 ; asdr-list : list?
 ;
 ; creates a vector that plays one of four waves with asdr-envelope applied to it when sample-node is played over it
- (define new-synthesize-note
-   (lambda (modifier sample-rate frequency duration asdr-list)
+(define new-synthesize-note
+  (lambda (modifier sample-rate frequency duration asdr-list)
     
     (let* ([num-sample (* duration sample-rate)])
-    
-     (cond 
-                                                    ;   all ~~~-samples are a list of vectors and will be replaced by the microphone vector
-                                                    ;   asdr-envelope will be replaced with the sound modifier that we have yet to produce
-          [(equal? modifier "deep-voice-envelope")  (apply-envelope ( ~~~-sample  sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
-          [(equal? modifier "high-voice-envelope") (apply-envelope ( ~~~-sample sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
-          [(equal? modifier "robot-voice-envelope") (apply-envelope ( ~~~-sample sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
-          [(equal? modifier "slow-voice-envelope") (apply-envelope ( ~~~-sample sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
+      
+      (cond 
+        ; all ~~~-samples are a list of vectors and will be replaced by the microphone vector
+        ; asdr-envelope will be replaced with the sound modifier that we have yet to produce
+        [(equal? modifier "deep-voice-envelope") (apply-envelope ( ~~~-sample sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
+        [(equal? modifier "high-voice-envelope") (apply-envelope ( ~~~-sample sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
+        [(equal? modifier "robot-voice-envelope") (apply-envelope ( ~~~-sample sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
+        [(equal? modifier "slow-voice-envelope") (apply-envelope ( ~~~-sample sample-rate frequency duration) (asdr-envelope num-sample asdr-list))]
+        
+        )
+      
+      )))
 
-      )
-    
-    )))
-    
-    
+
 ; ======================================NEW IMPORTS==================================================
 ; ===============Helper functions ===============
 ; (samples-per-wave sample-rate frequency) integer?
@@ -338,50 +338,82 @@
 ;********************************************************
 
 
+(define synthesize-note
+  (lambda (waveform sample-rate frequency duration)
+    (cond [(equal? waveform "square") (square-sample sample-rate frequency duration)]
+      [(equal? waveform "sawtooth") (sawtooth-sample sample-rate frequency duration)]
+      [(equal? waveform "triangle") (triangle-sample sample-rate frequency duration)]
+      [(equal? waveform "sine") (sine-sample sample-rate frequency duration)]
+      [else "not valid waveform"])))
 
 
 
 
-
+(define main-mic
+  (lambda (ctx) 
+    (audio-pipeline ctx 
+      (microphone-node ctx))
+    
+    )
+  )
 
 (define deep-voice-envelope 
-(lambda (end)
-"vector"
-))
+  (lambda ()
+    (let (
+      [context (audio-context 44100)]
+    )
+    (main-mic context ))
+    ))
+
+(define voice-changer 
+  (lambda (str)
+    (let (
+      [deepvoice (audio-context 44100)]
+      [highvoice (audio-context 44100)]
+      [robotvoice (audio-context 44100)]
+    )
+    (cond 
+      [(equal? str "deep voice") (main-mic deepvoice)]
+      [(equal? str "deep voice") (main-mic highvoice)]
+      [(equal? str "deep voice") (main-mic robotvoice)]
+    
+    )))
+    )
+
 
 
 (define high-voice-envelope 
-(lambda (end)
-"vector"
-))
+  (lambda (end)
+    "vector"
+    ))
 
 
 (define robot-voice-envelope 
-(lambda (end)
-"vector"
-))
+  (lambda (end)
+    "vector"
+    ))
 
 
 (define slow-voice-envelope 
-(lambda (end)
-"vector"
-))
+  (lambda (end)
+    "vector"
+    ))
 
 (define fast-voice-envelope 
-(lambda (end)
-"vector"
-))
+  (lambda (end)
+    "vector"
+    ))
 
 
 (define delayed-voice-envelope 
-(lambda (end)
-"vector"
-))
+  (lambda (end)
+    "vector"
+    ))
 
 (define overlayed-voice-envelope 
-(lambda (end)
-"vector"
-))
+  (lambda (end)
+    "vector"
+    ))
 
 
 
