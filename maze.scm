@@ -1,3 +1,4 @@
+; ===========================imports used==============================
 (import canvas)
 (import html)
 
@@ -20,7 +21,7 @@
 (button "button" "reset button"))
 ; ========================creating the button's fucntionalities=================================
 
-(define positionx  (vector 250)
+(define positionx  (vector 265)
 )
 (define positiony (vector 480))
 (button-onclick upbtn
@@ -53,17 +54,17 @@
 
 
 ; -========================creating the canavas================================
-(define cvs (canvas 500 500))
+(define cvs (canvas 560 500))
 
 
 (define backround-color 
-(vector "white")
+(vector "black")
 )
 
 (animate-with 
 (lambda (time)
 (begin 
-(rectangle cvs 0 0 500 500 "solid" "black")
+(rectangle cvs 0 0 560 500 "solid" (vector-ref backround-color 0))
 (rectangle cvs (vector-ref positionx 0) (vector-ref positiony 0) 20 20 "solid" "red")
 )
 ))
