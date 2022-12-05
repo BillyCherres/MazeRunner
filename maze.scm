@@ -21,7 +21,7 @@
 (button "button" "reset button"))
 ; ========================creating the button's fucntionalities=================================
 
-(define positionx  (vector 265)
+(define positionx  (vector 280)
 )
 (define positiony (vector 480))
 (button-onclick upbtn
