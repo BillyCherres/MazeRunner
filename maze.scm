@@ -1,3 +1,4 @@
+
 ; ===========================imports used==============================
 
 (import canvas)
@@ -56,12 +57,22 @@
 
 ; -========================creating the canavas================================
 (define cvs (canvas 560 560))
+<<<<<<< HEAD
 
+=======
+>>>>>>> 20f16784fed8bfd33724ae367902ac75adc3e423
 
 (define color-of-rectangle 
   (vector "black")
   )
 
+<<<<<<< HEAD
+=======
+(define color-of-rectangle 
+  (vector "black")
+  )
+
+>>>>>>> 20f16784fed8bfd33724ae367902ac75adc3e423
 (define color-of-inside-walls
   "green"
 )
@@ -138,3 +149,4 @@ downbtn
 leftbtn
 rightbtn
 resetbtn
+
