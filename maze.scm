@@ -21,6 +21,8 @@
 )
 (define resetbtn
 (button "button" "reset button"))
+(define cheatbtn
+(button "button" "cheat"))
 ; ========================creating the button's fucntionalities=================================
 
 (define positionx  (vector 0)
@@ -54,25 +56,23 @@
 (lambda ()
 (begin (vector-set! positionx 0 0) (vector-set! positiony 0 100))))
 
-
+(button-onclick cheatbtn
+(lambda ()
+(begin (vector-set! positionx 0 400) (vector-set! positiony 0 490))))
 ; -========================creating the canavas================================
 (define cvs (canvas 560 560))
-<<<<<<< HEAD
 
-=======
->>>>>>> 20f16784fed8bfd33724ae367902ac75adc3e423
 
 (define color-of-rectangle 
   (vector "black")
   )
 
-<<<<<<< HEAD
-=======
+
 (define color-of-rectangle 
   (vector "black")
   )
 
->>>>>>> 20f16784fed8bfd33724ae367902ac75adc3e423
+
 (define color-of-inside-walls
   "green"
 )
@@ -149,4 +149,5 @@ downbtn
 leftbtn
 rightbtn
 resetbtn
+cheatbtn
 
