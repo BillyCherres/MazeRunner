@@ -1,4 +1,12 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+
+
+=======
+=======
 ; ===========================imports used==============================
+>>>>>>> 3a767036eebe40daee5fd027a78427fde701ad8a
 (import canvas)
 (import html)
 
@@ -72,8 +80,12 @@
 
 
 cvs
+<<<<<<< HEAD
+>>>>>>> 000ee4728e37659bc1952d5611229c8e4602b901
+=======
 upbtn
 downbtn
 leftbtn
 rightbtn
 resetbtn
+>>>>>>> 3a767036eebe40daee5fd027a78427fde701ad8a
