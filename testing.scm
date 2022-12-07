@@ -7,7 +7,7 @@
 )
 
 (define color-of-rectangle 
-(vector "blue")
+(vector "red")
 )
 
 (button-onclick btn
@@ -22,6 +22,9 @@
 (text cvs (number->string time) 50 50 "solid" "blue" "24px sans-serif"))
 ))
 
+
 cvs
 btn
+
+
 
