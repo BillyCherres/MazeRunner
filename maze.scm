@@ -1,4 +1,3 @@
-
 ; ===========================imports used==============================
 
 (import canvas)
@@ -28,6 +27,8 @@
 (define positionx  (vector 0)
 )
 (define positiony (vector 50))
+
+
 (button-onclick upbtn
 (lambda ()
 (vector-set! positiony 0 (- (vector-ref positiony 0 )10 ))
@@ -84,8 +85,10 @@
 (animate-with 
 (lambda (time)
 (begin 
-
+      ;--------- background color= ------------
       (rectangle cvs 0 0 560 560 "solid" (vector-ref color-of-rectangle 0))
+      ;--------- position of the users box (red square) ------------
+      
       (rectangle cvs (vector-ref positionx 0) (vector-ref positiony 0) 20 20 "solid" "red")
       ;--------- outer wall ------------
       (rectangle cvs 40 70 340 10 "solid" color-of-inside-walls)
