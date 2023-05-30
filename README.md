@@ -1,4 +1,4 @@
-# Billy'sBots
+# Maze Runner
 # Project Purpose
 - Creating a maze game 
 - User is supposed to use the buttons to move the square
