@@ -4,6 +4,8 @@
 - User is supposed to use the buttons to move the square
 - There is also a reset button to restart the game
 - When the square gets to destination, music is played :)
+# Extentions
+<img width="766" alt="Screen Shot 2023-05-29 at 8 39 15 PM" src="https://github.com/BillyCherres/billysbots/assets/72890070/8d932e79-412b-4a59-b9da-1255544eb9de">
 
 # imports
 
